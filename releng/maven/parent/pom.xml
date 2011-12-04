@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>mlm.eclipse</groupId>
+	<artifactId>mlm.eclipse.ide.jsbuilder-parent</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>../../../features/mlm.eclipse.ide.jsbuilder</module>
+		<!-- <module>../../../features/mlm.eclipse.ide.jsbuilder.source</module> -->
+		<module>../../../bundles/mlm.eclipse.ide.jsbuilder</module>
+		<module>../repository</module>
+	</modules>
+
+	<properties>
+		<tycho-version>0.13.0</tycho-version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<resolver>p2</resolver>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>plugin-source</id>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<format>'v'yyyyMMdd-HHmm</format>
+					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>helios</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>eclipse-target</name>
+					<value>helios</value>
+				</property>
+			</activation>
+			<repositories>
+				<repository>
+					<id>helios</id>
+					<layout>p2</layout>
+					<url>http://download.eclipse.org/releases/helios</url>
+				</repository>
+				<repository>
+					<id>helios updates</id>
+					<layout>p2</layout>
+					<url>http://download.eclipse.org/eclipse/updates/3.6</url>
+				</repository>
+			</repositories>
+		</profile>
+		<profile>
+			<id>indigo</id>
+			<activation>
+				<property>
+					<name>eclipse-target</name>
+					<value>indigo</value>
+				</property>
+			</activation>
+			<repositories>
+				<repository>
+					<id>indigo</id>
+					<layout>p2</layout>
+					<url>http://download.eclipse.org/releases/indigo</url>
+				</repository>
+				<repository>
+					<id>indigo updates</id>
+					<layout>p2</layout>
+					<url>http://download.eclipse.org/eclipse/updates/3.7</url>
+				</repository>
+			</repositories>
+		</profile>
+		<profile>
+			<id>juno</id>
+			<activation>
+				<property>
+					<name>eclipse-target</name>
+					<value>juno</value>
+				</property>
+			</activation>
+			<repositories>
+				<repository>
+					<id>juno</id>
+					<layout>p2</layout>
+					<url>http://download.eclipse.org/releases/juno</url>
+				</repository>
+				<repository>
+					<id>juno updates</id>
+					<layout>p2</layout>
+					<url>http://download.eclipse.org/eclipse/updates/3.8</url>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
+
+</project>
