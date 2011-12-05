@@ -37,6 +37,8 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 public class ToggleNatureHandler extends AbstractHandler {
 
+	// TODO cleanup
+
 
 	/**
 	 * Toggles sample nature on a project
@@ -95,6 +97,7 @@ public class ToggleNatureHandler extends AbstractHandler {
 			// TODO log?
 			ex.printStackTrace();
 		}
+
 	}
 
 
