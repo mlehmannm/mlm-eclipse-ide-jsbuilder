@@ -1,3 +1,15 @@
+//
+// builder.js (https://github.com/mlehmannm/mlm-eclipse-ide-jsbuilder)
+//
+// Available global variables:
+// 
+//     builder - instance of org.eclipse.core.resources.IncrementalProjectBuilder
+//     log     - instance of org.eclipse.core.runtime.ILog
+//
+
+importPackage(org.eclipse.core.resources);
+importPackage(org.eclipse.core.runtime);
+
 /**
  * 
  * Clean.
@@ -13,8 +25,9 @@ function clean(pMonitor) {
 
 	var project = builder.getProject();
 
-	System.out.println("clean for " + project.getName());
-	System.out.println("\tfull path = " + project.getFullPath());
+	// TODO strange access to static method on java.lang.String
+	var message = java.lang.String.format("clean for project '%s' (%s)", project.getName(), project.getFullPath());
+	log.log(new Status(IStatus.OK, "jsbuilder", message));
 
 }
 
@@ -29,6 +42,8 @@ function clean(pMonitor) {
  * @param pMonitor
  *            {org.eclipse.core.runtime.IProgressMonitor} progress monitor
  * 
+ * @returns array of {org.eclipse.core.resources.IProject} projects to receive resource deltas for
+ * 
  * @see org.eclipse.core.resources.IncrementalProjectBuilder.build(int, String, Map, IProgressMonitor)
  * 
  */
@@ -37,9 +52,45 @@ function build(pKind, pArgs, pMonitor) {
 
 	var project = builder.getProject();
 
-	System.out.println("build for " + project.getName());
-	System.out.println("\tfull path = " + project.getFullPath());
-	System.out.println("\tkind = " + pKind);
-	System.out.println("\targs = " + pArgs);
+	if (pKind == IncrementalProjectBuilder.FULL_BUILD) {
+
+		// TODO strange access to static method on java.lang.String
+		var message = java.lang.String.format("full build for project '%s' (%s)", project.getName(), project.getFullPath());
+		log.log(new Status(IStatus.OK, "jsbuilder", message));
+
+	} else {
+
+		// TODO strange access to static method on java.lang.String
+		var startMessage = java.lang.String.format("start build for project '%s' (%s)", project.getName(), project.getFullPath());
+		log.log(new Status(IStatus.OK, "jsbuilder", startMessage));
+
+		var delta = builder.getDelta(project);
+		if (delta != null) {
+
+			delta.accept(new IResourceDeltaVisitor({
+
+				visit : function(delta) {
+
+					// TODO strange access to static method on java.lang.String
+					var message = java.lang.String.format("changed resource '%s'", delta.getResource());
+					log.log(new Status(IStatus.OK, "jsbuilder", message));
+
+					return true;
+
+				}
+
+			}))
+
+		} else {
+
+			log.log(new Status(IStatus.OK, "jsbuilder", "empty delta"));
+
+		}
+
+		// TODO strange access to static method on java.lang.String
+		var endMessage = java.lang.String.format("end build for project '%s' (%s)", project.getName(), project.getFullPath());
+		log.log(new Status(IStatus.OK, "jsbuilder", endMessage));
+
+	}
 
 }

@@ -22,6 +22,7 @@ import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
@@ -196,13 +197,17 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 
 		try {
 
+			final ILog log = Activator.getDefault().getLog();
+
 			// enter context
 			final Context cx = mContextFactory.enterContext();
 
 			// create (and configure) global script scope (sealed)
 			mGlobalScriptScope = new ImporterTopLevel(cx, true);
-			ScriptableObject.putProperty(mGlobalScriptScope, "builder", Context.javaToJS(this, mGlobalScriptScope)); //$NON-NLS-1$
-			// TODO add marker constants that can be used by the builder script to global scope
+			ScriptableObject.putConstProperty(mGlobalScriptScope, "builder", Context.javaToJS(this, mGlobalScriptScope)); //$NON-NLS-1$
+			ScriptableObject.putConstProperty(mGlobalScriptScope, "log", Context.javaToJS(log, mGlobalScriptScope)); //$NON-NLS-1$
+			ScriptableObject.putConstProperty(mGlobalScriptScope, "ID_MARKER", ID_MARKER); //$NON-NLS-1$
+			ScriptableObject.putConstProperty(mGlobalScriptScope, "ID_PROBLEM_MARKER", ID_PROBLEM_MARKER); //$NON-NLS-1$
 
 			URL url = null;
 			InputStreamReader isr = null;
@@ -223,7 +228,7 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 				final String msg = "Error loading utils! Some things may not work."; //$NON-NLS-1$
 				final MultiStatus status = new MultiStatus(Activator.ID_PLUGIN, 0, msg, ex);
 				status.add(new Status(IStatus.ERROR, status.getPlugin(), "url = " + url)); //$NON-NLS-1$
-				Activator.getDefault().getLog().log(status);
+				log.log(status);
 
 			} finally {
 
@@ -354,7 +359,10 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 	private IProject[] delegateBuild( final int pKind, final Map pArgs, final IProgressMonitor pMonitor ) {
 
 		// initialise builder script, if necessary
-		initialiseBuilderScript();
+		final boolean builderScriptChanged = initialiseBuilderScript();
+
+		// change "kind" if script has changed
+		final int kind = builderScriptChanged ? FULL_BUILD : pKind;
 
 		// check builder script
 		if (mScript == null) {
@@ -380,7 +388,7 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 
 			// define function arguments
 			final Object funcArgs[] = {
-			    Integer.valueOf(pKind), //
+			    Integer.valueOf(kind), //
 			    pArgs, //
 			    SubMonitor.convert(pMonitor), //
 			};
@@ -468,11 +476,11 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 	 *
 	 */
 
-	private void initialiseBuilderScript() {
+	private boolean initialiseBuilderScript() {
 
 		if (mScriptScope != null && mScriptFile != null && mScript != null) {
 
-			return;
+			return false;
 
 		}
 
@@ -481,9 +489,9 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 		final IFile scriptFile = getProject().getFile(BUILDER_SCRIPT_NAME);
 		if (!scriptFile.exists()) {
 
-			// TODO log? add problem marker to project? quick fix?
+			// TODO log? add problem marker to project? quick fix to add builder.js?
 
-			return;
+			return false;
 
 		}
 
@@ -523,6 +531,8 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 			mScriptScope = scriptScope;
 			mScriptFile = scriptFile;
 			mScript = script;
+
+			return true;
 
 		} catch (final RhinoException ex) {
 
@@ -566,6 +576,8 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 
 		}
 
+		return false;
+
 	}
 
 
@@ -588,7 +600,7 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 
 	/**
 	 *
-	 * TODO
+	 * Internal method to close a {@link Closeable} silently.
 	 *
 	 * @since mlm.eclipse.ide.jsbuilder 1.0
 	 *

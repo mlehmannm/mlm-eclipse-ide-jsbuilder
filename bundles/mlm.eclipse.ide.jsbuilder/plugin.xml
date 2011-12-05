@@ -18,6 +18,7 @@
          name="%builder.name"
          point="org.eclipse.core.resources.builders">
       <builder
+            callOnEmptyDelta="true"
             hasNature="true">
          <run
                class="mlm.eclipse.ide.jsbuilder.internal.JavaScriptBuilder">
