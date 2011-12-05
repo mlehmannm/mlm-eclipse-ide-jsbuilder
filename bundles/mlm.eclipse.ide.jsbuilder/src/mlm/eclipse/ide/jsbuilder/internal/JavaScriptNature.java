@@ -67,7 +67,7 @@ public class JavaScriptNature implements IProjectNature {
 	 *
 	 */
 
-    public IProject getProject() {
+	public IProject getProject() {
 
 		return mProject;
 
@@ -82,7 +82,7 @@ public class JavaScriptNature implements IProjectNature {
 	 *
 	 */
 
-    public void setProject( final IProject pProject ) {
+	public void setProject( final IProject pProject ) {
 
 		mProject = pProject;
 
@@ -97,7 +97,7 @@ public class JavaScriptNature implements IProjectNature {
 	 *
 	 */
 
-    public void configure() throws CoreException {
+	public void configure() throws CoreException {
 
 		final IProjectDescription desc = mProject.getDescription();
 		final ICommand[] commands = desc.getBuildSpec();
@@ -132,7 +132,7 @@ public class JavaScriptNature implements IProjectNature {
 	 *
 	 */
 
-    public void deconfigure() throws CoreException {
+	public void deconfigure() throws CoreException {
 
 		final IProjectDescription description = getProject().getDescription();
 		final ICommand[] commands = description.getBuildSpec();
