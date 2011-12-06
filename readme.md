@@ -11,5 +11,5 @@ Possible use cases
 
 * Rapid prototype your own builders without actually writing one
 * Simple synchronisations (e.g., plugin version to POM artifact version)
-* Not so simple symchronisations (e.g., keep "source" feature up-to-date with its corresponding "binary" feature, especially for tycho builds)
+* Not so simple synchronisations (e.g., keep "source" feature up-to-date with its corresponding "binary" feature, especially for tycho builds)
 * Many more
