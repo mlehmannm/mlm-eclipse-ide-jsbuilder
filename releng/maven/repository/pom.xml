@@ -59,7 +59,7 @@
 									<outputDirectory>${env.WORKSPACE}/p2repo</outputDirectory>
 									<resources>
 										<resource>
-											<directory>target/repository</directory>
+											<directory>${project.build.directory}/repository</directory>
 											<filtering>false</filtering>
 										</resource>
 									</resources>
