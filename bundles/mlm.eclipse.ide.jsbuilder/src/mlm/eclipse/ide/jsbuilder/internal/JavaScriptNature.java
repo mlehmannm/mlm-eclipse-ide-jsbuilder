@@ -10,12 +10,13 @@ import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IProjectNature;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 
 
 /**
  *
- * Nature for the JavaScript builder.
+ * Nature for the JavaScript-based builder.
  *
  * @author Marco Lehmann-Mörz
  *
@@ -134,7 +135,7 @@ public class JavaScriptNature implements IProjectNature {
 
 	public void deconfigure() throws CoreException {
 
-		final IProjectDescription description = getProject().getDescription();
+		final IProjectDescription description = mProject.getDescription();
 		final ICommand[] commands = description.getBuildSpec();
 
 		for (int i = 0; i < commands.length; ++i) {
@@ -147,6 +148,18 @@ public class JavaScriptNature implements IProjectNature {
 				System.arraycopy(commands, i + 1, newCommands, i, commands.length - i - 1);
 				description.setBuildSpec(newCommands);
 				mProject.setDescription(description, null);
+
+				// remove all markers
+				try {
+
+					mProject.deleteMarkers(JavaScriptBuilder.ID_PROBLEM_MARKER, false, IResource.DEPTH_INFINITE);
+					mProject.deleteMarkers(JavaScriptBuilder.ID_MARKER, false, IResource.DEPTH_INFINITE);
+
+				} catch (final CoreException ex) {
+
+					// intentionally left empty
+
+				}
 
 				return;
 
