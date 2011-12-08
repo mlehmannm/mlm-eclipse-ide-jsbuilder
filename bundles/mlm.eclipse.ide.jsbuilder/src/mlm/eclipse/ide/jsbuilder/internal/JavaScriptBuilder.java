@@ -303,9 +303,9 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 			final String msg = "Error during call to function 'clean' within builder script 'builder.js'!"; //$NON-NLS-1$
 			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.ID_PLUGIN, msg, ex));
 
-			// report problem as marker
 			try {
 
+				// report problem as marker
 				final IMarker marker = mScriptFile.createMarker(ID_PROBLEM_MARKER);
 				marker.setAttribute(IMarker.MESSAGE, ex.details());
 				marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
@@ -323,9 +323,9 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 			final String msg = "Error during call to function 'clean' within builder script 'builder.js'!"; //$NON-NLS-1$
 			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.ID_PLUGIN, msg, ex));
 
-			// report problem as marker
 			try {
 
+				// report problem as marker
 				final IMarker marker = mScriptFile.createMarker(ID_PROBLEM_MARKER);
 				marker.setAttribute(IMarker.MESSAGE, Messages.JavaScriptBuilder_unknownErrorSeeErrorLogForDetails);
 				marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
@@ -447,9 +447,9 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 			final String msg = "Error during call to function 'build' within builder script 'builder.js'!"; //$NON-NLS-1$
 			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.ID_PLUGIN, msg, ex));
 
-			// report problem as marker
 			try {
 
+				// report problem as marker
 				final IMarker marker = mScriptFile.createMarker(ID_PROBLEM_MARKER);
 				marker.setAttribute(IMarker.MESSAGE, ex.details());
 				marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
@@ -467,9 +467,9 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 			final String msg = "Error during call to function 'build' within builder script 'builder.js'!"; //$NON-NLS-1$
 			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.ID_PLUGIN, msg, ex));
 
-			// report problem as marker
 			try {
 
+				// report problem as marker
 				final IMarker marker = mScriptFile.createMarker(ID_PROBLEM_MARKER);
 				marker.setAttribute(IMarker.MESSAGE, Messages.JavaScriptBuilder_unknownErrorSeeErrorLogForDetails);
 				marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
@@ -512,9 +512,9 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 
 		final IProject project = getProject();
 
-		// remove markers from script file
 		try {
 
+			// remove markers from script file
 			project.deleteMarkers(ID_PROBLEM_MARKER, false, IResource.DEPTH_ZERO);
 
 		} catch (final CoreException ex) {
@@ -527,14 +527,13 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 		final IFile scriptFile = project.getFile(BUILDER_SCRIPT_NAME);
 		if (!scriptFile.exists()) {
 
-			// report problem as marker
 			try {
 
+				// report problem as marker
 				final IMarker marker = project.createMarker(ID_PROBLEM_MARKER);
 				marker.setAttribute(IMarker.MESSAGE, Messages.JavaScriptBuilder_builderScriptNotFound);
 				marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
-
-				// TODO quick fix?
+				marker.setAttribute(ID_PROBLEM_MARKER, "missingBuilderJS");
 
 			} catch (final CoreException cex) {
 
@@ -546,9 +545,9 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 
 		}
 
-		// remove markers from script file
 		try {
 
+			// remove markers from script file
 			scriptFile.deleteMarkers(ID_PROBLEM_MARKER, false, IResource.DEPTH_ZERO);
 
 		} catch (final CoreException ex) {
@@ -585,9 +584,9 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 
 				cleanFuncObj = null;
 
-				// report problem as marker
 				try {
 
+					// report problem as marker
 					final IMarker marker = scriptFile.createMarker(ID_PROBLEM_MARKER);
 					marker.setAttribute(IMarker.MESSAGE, Messages.JavaScriptBuilder_functionCleanNotFound);
 					marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
@@ -606,9 +605,9 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 
 				buildFuncObj = null;
 
-				// report problem as marker
 				try {
 
+					// report problem as marker
 					final IMarker marker = scriptFile.createMarker(ID_PROBLEM_MARKER);
 					marker.setAttribute(IMarker.MESSAGE, Messages.JavaScriptBuilder_functionBuildNotFound);
 					marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
@@ -635,9 +634,9 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 			final String msg = "Error during compile of 'builder.js'!"; //$NON-NLS-1$
 			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.ID_PLUGIN, msg, ex));
 
-			// report problem as marker
 			try {
 
+				// report problem as marker
 				final IMarker marker = scriptFile.createMarker(ID_PROBLEM_MARKER);
 				marker.setAttribute(IMarker.MESSAGE, ex.details());
 				marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
@@ -657,6 +656,7 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 
 			try {
 
+				// report problem as marker
 				final IMarker marker = scriptFile.createMarker(ID_PROBLEM_MARKER);
 				marker.setAttribute(IMarker.MESSAGE, Messages.JavaScriptBuilder_unknownErrorSeeErrorLogForDetails);
 				marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
