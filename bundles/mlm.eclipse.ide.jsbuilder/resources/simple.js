@@ -25,7 +25,7 @@ function clean(pMonitor) {
 
 	var project = builder.getProject();
 
-	// TODO strange access to static method on java.lang.String
+	// log
 	var message = java.lang.String.format("clean for project '%s' (%s)", project.getName(), project.getFullPath());
 	log.log(new Status(IStatus.OK, "jsbuilder", message));
 
@@ -54,13 +54,13 @@ function build(pKind, pArgs, pMonitor) {
 
 	if (pKind == IncrementalProjectBuilder.FULL_BUILD) {
 
-		// TODO strange access to static method on java.lang.String
+		// log
 		var message = java.lang.String.format("full build for project '%s' (%s)", project.getName(), project.getFullPath());
 		log.log(new Status(IStatus.OK, "jsbuilder", message));
 
 	} else {
 
-		// TODO strange access to static method on java.lang.String
+		// log
 		var startMessage = java.lang.String.format("start build for project '%s' (%s)", project.getName(), project.getFullPath());
 		log.log(new Status(IStatus.OK, "jsbuilder", startMessage));
 
@@ -71,7 +71,7 @@ function build(pKind, pArgs, pMonitor) {
 
 				visit : function(delta) {
 
-					// TODO strange access to static method on java.lang.String
+					// log
 					var message = java.lang.String.format("changed resource '%s'", delta.getResource());
 					log.log(new Status(IStatus.OK, "jsbuilder", message));
 
@@ -87,7 +87,7 @@ function build(pKind, pArgs, pMonitor) {
 
 		}
 
-		// TODO strange access to static method on java.lang.String
+		// log
 		var endMessage = java.lang.String.format("end build for project '%s' (%s)", project.getName(), project.getFullPath());
 		log.log(new Status(IStatus.OK, "jsbuilder", endMessage));
 

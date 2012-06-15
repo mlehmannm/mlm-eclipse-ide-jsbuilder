@@ -6,13 +6,12 @@
 
 	<parent>
 		<groupId>mlm.eclipse.ide.jsbuilder</groupId>
-		<artifactId>jsbuilder-parent</artifactId>
-		<version>0.7.0-SNAPSHOT</version>
-		<relativePath>../parent</relativePath>
+		<artifactId>mlm.eclipse.ide.jsbuilder-parent</artifactId>
+		<version>0.8.0-SNAPSHOT</version>
+		<relativePath>../../</relativePath>
 	</parent>
 
-	<name>MLM Eclipse JSBuilder</name>
-	<artifactId>jsbuilder-repository</artifactId>
+	<artifactId>mlm.eclipse.ide.jsbuilder-repository</artifactId>
 	<packaging>eclipse-repository</packaging>
 
 	<profiles>

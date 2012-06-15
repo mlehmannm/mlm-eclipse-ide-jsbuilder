@@ -6,9 +6,9 @@
 
 	<parent>
 		<groupId>mlm.eclipse.ide.jsbuilder</groupId>
-		<artifactId>jsbuilder-parent</artifactId>
-		<version>0.7.0-SNAPSHOT</version>
-		<relativePath>../../releng/maven/parent</relativePath>
+		<artifactId>mlm.eclipse.ide.jsbuilder-parent</artifactId>
+		<version>0.8.0-SNAPSHOT</version>
+		<relativePath>../../</relativePath>
 	</parent>
 
 	<artifactId>mlm.eclipse.ide.jsbuilder.feature</artifactId>

@@ -1,6 +1,13 @@
-/*
- * Copyright (c) 2011 Marco Lehmann-Mörz. All rights reserved.
- */
+/*******************************************************************************
+ * Copyright (c) 2011, 2012 Marco Lehmann-Mörz.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Marco Lehmann-Mörz - initial API and implementation and/or initial documentation
+ *******************************************************************************/
 
 
 package mlm.eclipse.ide.jsbuilder.internal;
@@ -115,7 +122,7 @@ public class ToggleNatureHandler extends AbstractHandler {
 				if (!scriptFile.exists()) {
 
 					final Bundle bundle = Activator.getDefault().getBundle();
-					final URL url = FileLocator.find(bundle, new Path("resources/template.js"), null); //$NON-NLS-1$
+					final URL url = FileLocator.find(bundle, new Path("resources/simple.js"), null); //$NON-NLS-1$
 					if (url != null) {
 
 						InputStream is = null;
