@@ -8,14 +8,12 @@
 		<maven>3.0</maven>
 	</prerequisites>
 
-<!--
 	<pluginRepositories>
 		<pluginRepository>
 			<id>tycho-snapshots</id>
 			<url>https://oss.sonatype.org/content/groups/public/</url>
 		</pluginRepository>
 	</pluginRepositories>
--->
 
 	<groupId>mlm.eclipse.ide.jsbuilder</groupId>
 	<artifactId>mlm.eclipse.ide.jsbuilder-parent</artifactId>
