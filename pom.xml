@@ -71,13 +71,11 @@
 					</dependency>
 				</dependencies>
 				<configuration>
-					<!-- causes NPE
 					<timestampProvider>jgit</timestampProvider>
 					<jgit.ignore>
 						pom.xml
 						.gitignore
 					</jgit.ignore>
-					-->
 					<format>'v'yyyyMMdd-HHmm</format>
 					<archive>
 						<addMavenDescriptor>false</addMavenDescriptor>
