@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>mlm.eclipse.ide.jsbuilder</groupId>
+	<artifactId>mlm.eclipse.ide.jsbuilder.parent</artifactId>
+	<version>0.9.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<prerequisites>
+		<maven>3.0</maven>
+	</prerequisites>
+
+	<!-- bleeding edge -->
+	<repositories>
+		<repository>
+			<id>tycho-snapshots</id>
+			<url>https://oss.sonatype.org/content/groups/public/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>tycho-snapshots</id>
+			<url>https://oss.sonatype.org/content/groups/public/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<properties>
+		<tycho-version>0.16.0-SNAPSHOT</tycho-version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<resolver>p2</resolver>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>plugin-source</id>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.eclipse.tycho.extras</groupId>
+						<artifactId>tycho-buildtimestamp-jgit</artifactId>
+						<version>${tycho-version}</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<timestampProvider>jgit</timestampProvider>
+					<jgit.ignore>
+						pom.xml
+						.gitignore
+					</jgit.ignore>
+					<format>'v'yyyyMMdd-HHmm</format>
+					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>helios</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>eclipse-target</name>
+					<value>helios</value>
+				</property>
+			</activation>
+			<properties>
+				<platform-version>[3.6.0,3.7.0)</platform-version>
+			</properties>
+			<repositories>
+				<repository>
+					<id>helios</id>
+					<layout>p2</layout>
+					<url>http://download.eclipse.org/releases/helios</url>
+				</repository>
+				<repository>
+					<id>helios updates</id>
+					<layout>p2</layout>
+					<url>http://download.eclipse.org/eclipse/updates/3.6</url>
+				</repository>
+			</repositories>
+		</profile>
+		<profile>
+			<id>indigo</id>
+			<activation>
+				<property>
+					<name>eclipse-target</name>
+					<value>indigo</value>
+				</property>
+			</activation>
+			<properties>
+				<platform-version>[3.7.0,3.8.0)</platform-version>
+			</properties>
+			<repositories>
+				<repository>
+					<id>indigo</id>
+					<layout>p2</layout>
+					<url>http://download.eclipse.org/releases/indigo</url>
+				</repository>
+				<repository>
+					<id>indigo updates</id>
+					<layout>p2</layout>
+					<url>http://download.eclipse.org/eclipse/updates/3.7</url>
+				</repository>
+			</repositories>
+		</profile>
+		<profile>
+			<id>juno</id>
+			<activation>
+				<property>
+					<name>eclipse-target</name>
+					<value>juno</value>
+				</property>
+			</activation>
+			<properties>
+				<platform-version>[3.8.0,3.9.0)</platform-version>
+			</properties>
+			<repositories>
+				<repository>
+					<id>juno</id>
+					<layout>p2</layout>
+					<url>http://download.eclipse.org/releases/juno</url>
+				</repository>
+				<repository>
+					<id>juno updates</id>
+					<layout>p2</layout>
+					<url>http://download.eclipse.org/eclipse/updates/3.8</url>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
+
+</project>
