@@ -11,6 +11,7 @@
 		<relativePath>../mlm.eclipse.ide.jsbuilder.parent</relativePath>
 	</parent>
 
+	<name>MLM Eclipse JSBuilder</name>
 	<artifactId>mlm.eclipse.ide.jsbuilder.repository</artifactId>
 	<packaging>eclipse-repository</packaging>
 
