@@ -31,7 +31,7 @@ import org.eclipse.ui.IMarkerResolutionGenerator;
  *
  */
 
-public class ProblemMarkerResolutionGenerator implements IMarkerResolutionGenerator {
+public final class ProblemMarkerResolutionGenerator implements IMarkerResolutionGenerator {
 
 
 	/**

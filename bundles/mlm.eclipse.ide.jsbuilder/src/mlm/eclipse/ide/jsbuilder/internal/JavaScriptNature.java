@@ -32,7 +32,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
  *
  */
 
-public class JavaScriptNature implements IProjectNature {
+public final class JavaScriptNature implements IProjectNature {
 
 
 	/**

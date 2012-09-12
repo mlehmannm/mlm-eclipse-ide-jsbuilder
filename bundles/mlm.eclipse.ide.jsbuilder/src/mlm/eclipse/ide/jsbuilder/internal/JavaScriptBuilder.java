@@ -232,7 +232,7 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 			URL url = null;
 			InputStreamReader isr = null;
 
-			// TODO load utilities via extension point?
+			// TODO load utilities via extension point? requireJS?
 
 			try {
 

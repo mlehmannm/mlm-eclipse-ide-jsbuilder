@@ -42,7 +42,7 @@ import org.osgi.framework.Bundle;
  *
  */
 
-public class ToggleNatureHandler extends AbstractHandler {
+public final class ToggleNatureHandler extends AbstractHandler {
 
 
 	/**

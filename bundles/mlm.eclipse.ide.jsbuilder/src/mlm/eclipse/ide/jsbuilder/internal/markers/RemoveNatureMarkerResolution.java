@@ -33,7 +33,7 @@ import org.eclipse.ui.IMarkerResolution;
  *
  */
 
-public class RemoveNatureMarkerResolution implements IMarkerResolution {
+public final class RemoveNatureMarkerResolution implements IMarkerResolution {
 
 
 	/**
