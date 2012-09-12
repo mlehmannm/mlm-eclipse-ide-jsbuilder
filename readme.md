@@ -4,7 +4,7 @@ JavaScript-based Builder for Eclipse IDE [![Build Status](https://secure.travis-
 Update Site
 -----------
 
-https://github.com/mlehmannm/mlm-eclipse-ide-jsbuilder/raw/p2repo/
+http://mlehmannm.github.com/mlm-eclipse-ide-jsbuilder/
 
 Possible use cases
 ------------------
