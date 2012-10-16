@@ -222,8 +222,8 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 			// enter context
 			final Context cx = mContextFactory.enterContext();
 
-			// create (and configure) global script scope (sealed)
-			mGlobalScriptScope = new ImporterTopLevel(cx, true);
+			// create (and configure) global script scope
+			mGlobalScriptScope = new ImporterTopLevel(cx);
 			ScriptableObject.putConstProperty(mGlobalScriptScope, "builder", Context.javaToJS(this, mGlobalScriptScope)); //$NON-NLS-1$
 			ScriptableObject.putConstProperty(mGlobalScriptScope, "log", Context.javaToJS(log, mGlobalScriptScope)); //$NON-NLS-1$
 			ScriptableObject.putConstProperty(mGlobalScriptScope, "ID_MARKER", ID_MARKER); //$NON-NLS-1$

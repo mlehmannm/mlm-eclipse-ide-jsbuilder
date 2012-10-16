@@ -6,14 +6,26 @@
 
 	<parent>
 		<groupId>mlm.eclipse.ide.jsbuilder</groupId>
-		<artifactId>mlm.eclipse.ide.jsbuilder.parent</artifactId>
-		<version>0.9.0-SNAPSHOT</version>
-		<relativePath>../mlm.eclipse.ide.jsbuilder.parent</relativePath>
+		<artifactId>jsbuilder-parent</artifactId>
+		<version>0.10.0-SNAPSHOT</version>
+		<relativePath>../../releng/parent</relativePath>
 	</parent>
 
-	<name>MLM Eclipse JSBuilder</name>
-	<artifactId>mlm.eclipse.ide.jsbuilder.repository</artifactId>
+	<artifactId>jsbuilder-repository</artifactId>
 	<packaging>eclipse-repository</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-repository-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<repositoryName>MLM Eclipse IDE JSBuilder</repositoryName>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 	<profiles>
 		<profile>
@@ -29,7 +41,6 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-antrun-plugin</artifactId>
-						<version>1.6</version>
 						<executions>
 							<execution>
 								<phase>package</phase>
@@ -38,7 +49,7 @@
 								</goals>
 								<configuration>
 									<target>
-										<delete dir="${env.WORKSPACE}/p2repo" />
+										<delete dir="${env.WORKSPACE}/p2repos/${project.artifactId}" />
 									</target>
 								</configuration>
 							</execution>
@@ -47,7 +58,6 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-resources-plugin</artifactId>
-						<version>2.5</version>
 						<executions>
 							<execution>
 								<id>copy-p2repo</id>
@@ -56,7 +66,7 @@
 									<goal>copy-resources</goal>
 								</goals>
 								<configuration>
-									<outputDirectory>${env.WORKSPACE}/p2repo</outputDirectory>
+									<outputDirectory>${env.WORKSPACE}/p2repos/${project.artifactId}</outputDirectory>
 									<resources>
 										<resource>
 											<directory>${project.build.directory}/repository</directory>

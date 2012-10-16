@@ -5,19 +5,20 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>mlm.eclipse.ide.jsbuilder</groupId>
-	<artifactId>aggregator</artifactId>
-	<version>0.9.0-SNAPSHOT</version>
+	<artifactId>jsbuilder-aggregator</artifactId>
+	<version>0.10.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<modules>
 		<!-- parent -->
-		<module>mlm.eclipse.ide.jsbuilder.parent</module>
-		<!-- features -->
-		<module>mlm.eclipse.ide.jsbuilder.feature</module>
-		<!-- bundles -->
-		<module>mlm.eclipse.ide.jsbuilder</module>
-		<!-- repositories -->
-		<module>mlm.eclipse.ide.jsbuilder.repository</module>
+		<module>releng/parent</module>
+		<!-- feature(s) -->
+		<module>features/mlm.eclipse.ide.jsbuilder.feature</module>
+		<!-- bundle(s) -->
+		<module>bundles/mlm.eclipse.ide.jsbuilder</module>
+		<!-- test(s) -->
+		<!-- repository -->
+		<module>releng/repository</module>
 	</modules>
 
 </project>

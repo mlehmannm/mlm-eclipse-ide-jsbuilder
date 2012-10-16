@@ -2,7 +2,7 @@
 <feature
       id="mlm.eclipse.ide.jsbuilder.feature"
       label="%feature.name"
-      version="0.9.0.qualifier"
+      version="0.10.0.qualifier"
       provider-name="%feature.provider"
       plugin="mlm.eclipse.ide.jsbuilder">
 
@@ -16,6 +16,13 @@
 
    <plugin
          id="mlm.eclipse.ide.jsbuilder"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.mozilla.javascript"
          download-size="0"
          install-size="0"
          version="0.0.0"
