@@ -16,26 +16,23 @@
 	</prerequisites>
 
 	<properties>
-		<tycho-version>0.19.0</tycho-version>
+		<tycho-version>0.21.0</tycho-version>
 	</properties>
 
 	<build>
 		<pluginManagement>
 			<plugins>
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-antrun-plugin</artifactId>
 					<version>1.7</version>
 				</plugin>
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-clean-plugin</artifactId>
 					<version>2.5</version>
 				</plugin>
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.5</version>
+					<version>2.6</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -185,7 +182,7 @@
 				</property>
 			</activation>
 			<properties>
-				<platform-version>[4.2.0,4.3.0)</platform-version>
+				<platform-version>[4.3.0,4.4.0)</platform-version>
 			</properties>
 			<repositories>
 				<repository>
@@ -196,7 +193,55 @@
 				<repository>
 					<id>eclipse-kepler-updates</id>
 					<layout>p2</layout>
-					<url>http://download.eclipse.org/eclipse/updates/4.2</url>
+					<url>http://download.eclipse.org/eclipse/updates/4.3</url>
+				</repository>
+			</repositories>
+		</profile>
+		<profile>
+			<id>eclipse-luna</id>
+			<activation>
+				<property>
+					<name>eclipse-target</name>
+					<value>luna</value>
+				</property>
+			</activation>
+			<properties>
+				<platform-version>[4.4.0,4.5.0)</platform-version>
+			</properties>
+			<repositories>
+				<repository>
+					<id>eclipse-luna</id>
+					<layout>p2</layout>
+					<url>http://download.eclipse.org/releases/luna</url>
+				</repository>
+				<repository>
+					<id>eclipse-luna-updates</id>
+					<layout>p2</layout>
+					<url>http://download.eclipse.org/eclipse/updates/4.4</url>
+				</repository>
+			</repositories>
+		</profile>
+		<profile>
+			<id>eclipse-mars</id>
+			<activation>
+				<property>
+					<name>eclipse-target</name>
+					<value>mars</value>
+				</property>
+			</activation>
+			<properties>
+				<platform-version>[4.5.0,4.6.0)</platform-version>
+			</properties>
+			<repositories>
+				<repository>
+					<id>eclipse-mars</id>
+					<layout>p2</layout>
+					<url>http://download.eclipse.org/releases/mars</url>
+				</repository>
+				<repository>
+					<id>eclipse-mars-updates</id>
+					<layout>p2</layout>
+					<url>http://download.eclipse.org/eclipse/updates/4.5</url>
 				</repository>
 			</repositories>
 		</profile>

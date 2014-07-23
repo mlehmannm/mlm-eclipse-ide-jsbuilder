@@ -1,0 +1,14 @@
+Parent Version
+--------------
+
+To propagate a new parent version to all modules
+1) set new parent version
+2) update child modules (mvn -N versions:update-child-modules)
+3) remove stray pom.xml.versionsBackup files (mvn versions:commit)
+
+POM Version
+-----------
+
+To synchronise OSGiMetadata to pom.xml
+1) update category.xml in repository-project with new feature-versions
+2) update pom.xml (mvn org.eclipse.tycho:tycho-versions-plugin:update-pom)
