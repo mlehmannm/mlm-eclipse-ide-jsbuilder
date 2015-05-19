@@ -1,13 +1,13 @@
-/*******************************************************************************
- * Copyright (c) 2011, 2012 Marco Lehmann-Mörz.
+/****************************************************************************************
+ * Copyright (c) 2011, 2015 Marco Lehmann-Mörz.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *    Marco Lehmann-Mörz - initial API and implementation and/or initial documentation
- *******************************************************************************/
+ *     Marco Lehmann-Mörz - initial API and implementation and/or initial documentation
+ ***************************************************************************************/
 
 
 package mlm.eclipse.ide.jsbuilder.internal;
@@ -62,33 +62,6 @@ import org.mozilla.javascript.ScriptableObject;
  */
 
 public final class JavaScriptBuilder extends IncrementalProjectBuilder {
-
-
-	/**
-	 *
-	 * The id of the builder.
-	 *
-	 */
-
-	public static final String ID = "mlm.eclipse.ide.jsbuilder.builder"; //$NON-NLS-1$
-
-
-	/**
-	 *
-	 * The id of the marker.
-	 *
-	 */
-
-	public static final String ID_MARKER = "mlm.eclipse.ide.jsbuilder.marker"; //$NON-NLS-1$
-
-
-	/**
-	 *
-	 * The id of the problem marker.
-	 *
-	 */
-
-	public static final String ID_PROBLEM_MARKER = "mlm.eclipse.ide.jsbuilder.problemmarker"; //$NON-NLS-1$
 
 
 	/**
@@ -187,6 +160,7 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 	private final IResourceDeltaVisitor mResourceDeltaVisitor = new IResourceDeltaVisitor() {
 
 
+		@Override
 		public boolean visit( final IResourceDelta pDelta ) throws CoreException {
 
 			if (mScriptFile != null && !mScriptFile.equals(pDelta.getResource())) {
@@ -226,8 +200,8 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 			mGlobalScriptScope = new ImporterTopLevel(cx);
 			ScriptableObject.putConstProperty(mGlobalScriptScope, "builder", Context.javaToJS(this, mGlobalScriptScope)); //$NON-NLS-1$
 			ScriptableObject.putConstProperty(mGlobalScriptScope, "log", Context.javaToJS(log, mGlobalScriptScope)); //$NON-NLS-1$
-			ScriptableObject.putConstProperty(mGlobalScriptScope, "ID_MARKER", ID_MARKER); //$NON-NLS-1$
-			ScriptableObject.putConstProperty(mGlobalScriptScope, "ID_PROBLEM_MARKER", ID_PROBLEM_MARKER); //$NON-NLS-1$
+			ScriptableObject.putConstProperty(mGlobalScriptScope, "ID_MARKER", Activator.ID_MARKER); //$NON-NLS-1$
+			ScriptableObject.putConstProperty(mGlobalScriptScope, "ID_PROBLEM_MARKER", Activator.ID_PROBLEM_MARKER); //$NON-NLS-1$
 
 			URL url = null;
 			InputStreamReader isr = null;
@@ -265,14 +239,6 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 
 	}
 
-
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see IncrementalProjectBuilder#clean(IProgressMonitor)
-	 *
-	 */
 
 	@Override
 	protected void clean( final IProgressMonitor pMonitor ) throws CoreException {
@@ -313,7 +279,7 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 			try {
 
 				// report problem as marker
-				final IMarker marker = mScriptFile.createMarker(ID_PROBLEM_MARKER);
+				final IMarker marker = mScriptFile.createMarker(Activator.ID_PROBLEM_MARKER);
 				marker.setAttribute(IMarker.MESSAGE, ex.details());
 				marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
 				marker.setAttribute(IMarker.LINE_NUMBER, ex.lineNumber());
@@ -333,7 +299,7 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 			try {
 
 				// report problem as marker
-				final IMarker marker = mScriptFile.createMarker(ID_PROBLEM_MARKER);
+				final IMarker marker = mScriptFile.createMarker(Activator.ID_PROBLEM_MARKER);
 				marker.setAttribute(IMarker.MESSAGE, Messages.JavaScriptBuilder_unknownErrorSeeErrorLogForDetails);
 				marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
 
@@ -352,14 +318,6 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 
 	}
 
-
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see IncrementalProjectBuilder#build(int, Map, IProgressMonitor)
-	 *
-	 */
 
 	@Override
 	@SuppressWarnings("rawtypes")
@@ -457,7 +415,7 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 			try {
 
 				// report problem as marker
-				final IMarker marker = mScriptFile.createMarker(ID_PROBLEM_MARKER);
+				final IMarker marker = mScriptFile.createMarker(Activator.ID_PROBLEM_MARKER);
 				marker.setAttribute(IMarker.MESSAGE, ex.details());
 				marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
 				marker.setAttribute(IMarker.LINE_NUMBER, ex.lineNumber());
@@ -477,7 +435,7 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 			try {
 
 				// report problem as marker
-				final IMarker marker = mScriptFile.createMarker(ID_PROBLEM_MARKER);
+				final IMarker marker = mScriptFile.createMarker(Activator.ID_PROBLEM_MARKER);
 				marker.setAttribute(IMarker.MESSAGE, Messages.JavaScriptBuilder_unknownErrorSeeErrorLogForDetails);
 				marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
 
@@ -522,7 +480,7 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 		try {
 
 			// remove markers from script file
-			project.deleteMarkers(ID_PROBLEM_MARKER, false, IResource.DEPTH_ZERO);
+			project.deleteMarkers(Activator.ID_PROBLEM_MARKER, false, IResource.DEPTH_ZERO);
 
 		} catch (final CoreException ex) {
 
@@ -537,10 +495,10 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 			try {
 
 				// report problem as marker
-				final IMarker marker = project.createMarker(ID_PROBLEM_MARKER);
+				final IMarker marker = project.createMarker(Activator.ID_PROBLEM_MARKER);
 				marker.setAttribute(IMarker.MESSAGE, Messages.JavaScriptBuilder_builderScriptNotFound);
 				marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
-				marker.setAttribute(ID_PROBLEM_MARKER, "missingBuilderJS");
+				marker.setAttribute(Activator.ID_PROBLEM_MARKER, "missingBuilderJS");
 
 			} catch (final CoreException cex) {
 
@@ -555,7 +513,7 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 		try {
 
 			// remove markers from script file
-			scriptFile.deleteMarkers(ID_PROBLEM_MARKER, false, IResource.DEPTH_ZERO);
+			scriptFile.deleteMarkers(Activator.ID_PROBLEM_MARKER, false, IResource.DEPTH_ZERO);
 
 		} catch (final CoreException ex) {
 
@@ -594,7 +552,7 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 				try {
 
 					// report problem as marker
-					final IMarker marker = scriptFile.createMarker(ID_PROBLEM_MARKER);
+					final IMarker marker = scriptFile.createMarker(Activator.ID_PROBLEM_MARKER);
 					marker.setAttribute(IMarker.MESSAGE, Messages.JavaScriptBuilder_functionCleanNotFound);
 					marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
 
@@ -615,7 +573,7 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 				try {
 
 					// report problem as marker
-					final IMarker marker = scriptFile.createMarker(ID_PROBLEM_MARKER);
+					final IMarker marker = scriptFile.createMarker(Activator.ID_PROBLEM_MARKER);
 					marker.setAttribute(IMarker.MESSAGE, Messages.JavaScriptBuilder_functionBuildNotFound);
 					marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
 
@@ -638,13 +596,13 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 		} catch (final RhinoException ex) {
 
 			// log
-			final String msg = "Error during compile of 'builder.js'!"; //$NON-NLS-1$
+			final String msg = "Error during compile of builder script 'builder.js'!"; //$NON-NLS-1$
 			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.ID_PLUGIN, msg, ex));
 
 			try {
 
 				// report problem as marker
-				final IMarker marker = scriptFile.createMarker(ID_PROBLEM_MARKER);
+				final IMarker marker = scriptFile.createMarker(Activator.ID_PROBLEM_MARKER);
 				marker.setAttribute(IMarker.MESSAGE, ex.details());
 				marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
 				marker.setAttribute(IMarker.LINE_NUMBER, ex.lineNumber());
@@ -664,7 +622,7 @@ public final class JavaScriptBuilder extends IncrementalProjectBuilder {
 			try {
 
 				// report problem as marker
-				final IMarker marker = scriptFile.createMarker(ID_PROBLEM_MARKER);
+				final IMarker marker = scriptFile.createMarker(Activator.ID_PROBLEM_MARKER);
 				marker.setAttribute(IMarker.MESSAGE, Messages.JavaScriptBuilder_unknownErrorSeeErrorLogForDetails);
 				marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
 

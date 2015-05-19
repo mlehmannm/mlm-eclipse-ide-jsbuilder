@@ -1,13 +1,13 @@
-/*******************************************************************************
- * Copyright (c) 2011, 2012 Marco Lehmann-Mörz.
+/****************************************************************************************
+ * Copyright (c) 2011, 2015 Marco Lehmann-Mörz.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *    Marco Lehmann-Mörz - initial API and implementation and/or initial documentation
- *******************************************************************************/
+ *     Marco Lehmann-Mörz - initial API and implementation and/or initial documentation
+ ***************************************************************************************/
 
 
 package mlm.eclipse.ide.jsbuilder.internal;
@@ -20,7 +20,6 @@ import java.util.Iterator;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.FileLocator;
@@ -60,14 +59,7 @@ public final class ToggleNatureHandler extends AbstractHandler {
 	}
 
 
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see IHandler#execute(ExecutionEvent)
-	 *
-	 */
-
+	@Override
 	public Object execute( final ExecutionEvent pEvent ) throws ExecutionException {
 
 		final ISelection selection = HandlerUtil.getActiveMenuSelectionChecked(pEvent);
@@ -117,7 +109,8 @@ public final class ToggleNatureHandler extends AbstractHandler {
 
 			if (JavaScriptNature.addNature(pProject)) {
 
-				// TODO keep in sync with AddMissingBuildScriptMarkerResolution --> use wizard with templates for different use cases
+				// TODO keep in sync with AddMissingBuildScriptMarkerResolution --> use wizard with templates for different use
+// cases
 				final IFile scriptFile = pProject.getFile(JavaScriptBuilder.BUILDER_SCRIPT_NAME);
 				if (!scriptFile.exists()) {
 

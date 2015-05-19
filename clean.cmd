@@ -1,3 +1,2 @@
 @setlocal
-@call mvn --version
-@call mvn clean -Dtycho.mode=maven
+@call mvn -q clean -Dtycho.mode=maven

@@ -2,7 +2,7 @@
 <feature
       id="mlm.eclipse.ide.jsbuilder.feature"
       label="%feature.name"
-      version="0.10.1.qualifier"
+      version="0.11.0.qualifier"
       provider-name="%feature.provider"
       plugin="mlm.eclipse.ide.jsbuilder">
 

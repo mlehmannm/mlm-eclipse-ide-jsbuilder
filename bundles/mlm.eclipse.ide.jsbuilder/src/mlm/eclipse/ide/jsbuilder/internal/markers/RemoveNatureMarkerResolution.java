@@ -1,19 +1,19 @@
-/*******************************************************************************
- * Copyright (c) 2011, 2012 Marco Lehmann-Mörz.
+/****************************************************************************************
+ * Copyright (c) 2011, 2015 Marco Lehmann-Mörz.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *    Marco Lehmann-Mörz - initial API and implementation and/or initial documentation
- *******************************************************************************/
+ *     Marco Lehmann-Mörz - initial API and implementation and/or initial documentation
+ ***************************************************************************************/
 
 
 package mlm.eclipse.ide.jsbuilder.internal.markers;
 
 
-import mlm.eclipse.ide.jsbuilder.internal.JavaScriptBuilder;
+import mlm.eclipse.ide.jsbuilder.internal.Activator;
 import mlm.eclipse.ide.jsbuilder.internal.JavaScriptNature;
 
 import org.eclipse.core.resources.IMarker;
@@ -51,14 +51,7 @@ public final class RemoveNatureMarkerResolution implements IMarkerResolution {
 	}
 
 
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see IMarkerResolution#getLabel()
-	 *
-	 */
-
+	@Override
 	public String getLabel() {
 
 		return "Remove Nature";
@@ -66,14 +59,7 @@ public final class RemoveNatureMarkerResolution implements IMarkerResolution {
 	}
 
 
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see IMarkerResolution#run(IMarker)
-	 *
-	 */
-
+	@Override
 	public void run( final IMarker pMarker ) {
 
 		try {
@@ -112,7 +98,7 @@ public final class RemoveNatureMarkerResolution implements IMarkerResolution {
 
 		}
 
-		final String reason = pMarker.getAttribute(JavaScriptBuilder.ID_PROBLEM_MARKER, null);
+		final String reason = pMarker.getAttribute(Activator.ID_PROBLEM_MARKER, null);
 		if (!"missingBuilderJS".equals(reason)) {
 
 			return null;

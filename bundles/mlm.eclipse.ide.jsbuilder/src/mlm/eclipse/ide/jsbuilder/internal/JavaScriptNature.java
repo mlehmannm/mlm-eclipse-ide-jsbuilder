@@ -1,13 +1,13 @@
-/*******************************************************************************
- * Copyright (c) 2011, 2012 Marco Lehmann-Mörz.
+/****************************************************************************************
+ * Copyright (c) 2011, 2015 Marco Lehmann-Mörz.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *    Marco Lehmann-Mörz - initial API and implementation and/or initial documentation
- *******************************************************************************/
+ *     Marco Lehmann-Mörz - initial API and implementation and/or initial documentation
+ ***************************************************************************************/
 
 
 package mlm.eclipse.ide.jsbuilder.internal;
@@ -37,15 +37,6 @@ public final class JavaScriptNature implements IProjectNature {
 
 	/**
 	 *
-	 * The id of the nature.
-	 *
-	 */
-
-	public static final String ID = "mlm.eclipse.ide.jsbuilder.nature"; //$NON-NLS-1$
-
-
-	/**
-	 *
 	 * The project.
 	 *
 	 */
@@ -68,14 +59,7 @@ public final class JavaScriptNature implements IProjectNature {
 	}
 
 
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see IProjectNature#getProject()
-	 *
-	 */
-
+	@Override
 	public IProject getProject() {
 
 		return mProject;
@@ -83,14 +67,7 @@ public final class JavaScriptNature implements IProjectNature {
 	}
 
 
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see IProjectNature#setProject(IProject)
-	 *
-	 */
-
+	@Override
 	public void setProject( final IProject pProject ) {
 
 		mProject = pProject;
@@ -98,14 +75,7 @@ public final class JavaScriptNature implements IProjectNature {
 	}
 
 
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see IProjectNature#configure()
-	 *
-	 */
-
+	@Override
 	public void configure() throws CoreException {
 
 		final IProjectDescription desc = mProject.getDescription();
@@ -113,7 +83,7 @@ public final class JavaScriptNature implements IProjectNature {
 
 		for (final ICommand command : commands) {
 
-			if (JavaScriptBuilder.ID.equals(command.getBuilderName())) {
+			if (Activator.ID_BUILDER.equals(command.getBuilderName())) {
 
 				return;
 
@@ -125,7 +95,7 @@ public final class JavaScriptNature implements IProjectNature {
 		final ICommand[] newCommands = new ICommand[commands.length + 1];
 		System.arraycopy(commands, 0, newCommands, 0, commands.length);
 		final ICommand command = desc.newCommand();
-		command.setBuilderName(JavaScriptBuilder.ID);
+		command.setBuilderName(Activator.ID_BUILDER);
 		newCommands[newCommands.length - 1] = command;
 		desc.setBuildSpec(newCommands);
 		mProject.setDescription(desc, null);
@@ -133,14 +103,7 @@ public final class JavaScriptNature implements IProjectNature {
 	}
 
 
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see IProjectNature#deconfigure()
-	 *
-	 */
-
+	@Override
 	public void deconfigure() throws CoreException {
 
 		final IProjectDescription description = mProject.getDescription();
@@ -148,7 +111,7 @@ public final class JavaScriptNature implements IProjectNature {
 
 		for (int i = 0; i < commands.length; ++i) {
 
-			if (JavaScriptBuilder.ID.equals(commands[i].getBuilderName())) {
+			if (Activator.ID_BUILDER.equals(commands[i].getBuilderName())) {
 
 				// remove builder from list of builders
 				final ICommand[] newCommands = new ICommand[commands.length - 1];
@@ -160,8 +123,8 @@ public final class JavaScriptNature implements IProjectNature {
 				try {
 
 					// remove all markers
-					mProject.deleteMarkers(JavaScriptBuilder.ID_PROBLEM_MARKER, false, IResource.DEPTH_INFINITE);
-					mProject.deleteMarkers(JavaScriptBuilder.ID_MARKER, false, IResource.DEPTH_INFINITE);
+					mProject.deleteMarkers(Activator.ID_PROBLEM_MARKER, false, IResource.DEPTH_INFINITE);
+					mProject.deleteMarkers(Activator.ID_MARKER, false, IResource.DEPTH_INFINITE);
 
 				} catch (final CoreException ex) {
 
@@ -202,7 +165,7 @@ public final class JavaScriptNature implements IProjectNature {
 		final String[] natures = description.getNatureIds();
 		for (int i = 0; i < natures.length; ++i) {
 
-			if (ID.equals(natures[i])) {
+			if (Activator.ID_NATURE.equals(natures[i])) {
 
 				// already present
 				return false;
@@ -214,7 +177,7 @@ public final class JavaScriptNature implements IProjectNature {
 		// add nature
 		final String[] newNatures = new String[natures.length + 1];
 		System.arraycopy(natures, 0, newNatures, 0, natures.length);
-		newNatures[natures.length] = ID;
+		newNatures[natures.length] = Activator.ID_NATURE;
 		description.setNatureIds(newNatures);
 		pProject.setDescription(description, null);
 
@@ -247,7 +210,7 @@ public final class JavaScriptNature implements IProjectNature {
 		final String[] natures = description.getNatureIds();
 		for (int i = 0; i < natures.length; ++i) {
 
-			if (ID.equals(natures[i])) {
+			if (Activator.ID_NATURE.equals(natures[i])) {
 
 				// remove nature
 				final String[] newNatures = new String[natures.length - 1];

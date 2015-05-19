@@ -1,13 +1,13 @@
-/*******************************************************************************
- * Copyright (c) 2011, 2012 Marco Lehmann-Mörz.
+/****************************************************************************************
+ * Copyright (c) 2011, 2015 Marco Lehmann-Mörz.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *    Marco Lehmann-Mörz - initial API and implementation and/or initial documentation
- *******************************************************************************/
+ *     Marco Lehmann-Mörz - initial API and implementation and/or initial documentation
+ ***************************************************************************************/
 
 
 package mlm.eclipse.ide.jsbuilder.internal.markers;
@@ -49,17 +49,10 @@ public final class ProblemMarkerResolutionGenerator implements IMarkerResolution
 	}
 
 
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see IMarkerResolutionGenerator#getResolutions(IMarker)
-	 *
-	 */
-
+	@Override
 	public IMarkerResolution[] getResolutions( final IMarker pMarker ) {
 
-		final List<IMarkerResolution> resolutions = new ArrayList<IMarkerResolution>(1);
+		final List<IMarkerResolution> resolutions = new ArrayList<>(1);
 
 		// add missing build script 'builder.js' when it is missing
 		final IMarkerResolution addMissingBuildScript = AddMissingBuildScriptMarkerResolution.create(pMarker);
@@ -69,7 +62,7 @@ public final class ProblemMarkerResolutionGenerator implements IMarkerResolution
 
 		}
 
-		// remove nature when build script 'builder.js' mising
+		// remove nature when build script 'builder.js' missing
 		final IMarkerResolution removeNature = RemoveNatureMarkerResolution.create(pMarker);
 		if (removeNature != null) {
 

@@ -1,13 +1,13 @@
-/*******************************************************************************
- * Copyright (c) 2011, 2012 Marco Lehmann-Mörz.
+/****************************************************************************************
+ * Copyright (c) 2011, 2015 Marco Lehmann-Mörz.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *    Marco Lehmann-Mörz - initial API and implementation and/or initial documentation
- *******************************************************************************/
+ *     Marco Lehmann-Mörz - initial API and implementation and/or initial documentation
+ ***************************************************************************************/
 
 
 package mlm.eclipse.ide.jsbuilder.internal;
@@ -41,6 +41,42 @@ public final class Activator extends AbstractUIPlugin {
 
 	/**
 	 *
+	 * The id of the nature.
+	 *
+	 */
+
+	public static final String ID_NATURE = ID_PLUGIN + ".nature"; //$NON-NLS-1$
+
+
+	/**
+	 *
+	 * The id of the builder.
+	 *
+	 */
+
+	public static final String ID_BUILDER = ID_PLUGIN + ".builder"; //$NON-NLS-1$
+
+
+	/**
+	 *
+	 * The id of the marker.
+	 *
+	 */
+
+	public static final String ID_MARKER = ID_PLUGIN + ".marker"; //$NON-NLS-1$
+
+
+	/**
+	 *
+	 * The id of the problem marker.
+	 *
+	 */
+
+	public static final String ID_PROBLEM_MARKER = ID_PLUGIN + ".problemmarker"; //$NON-NLS-1$
+
+
+	/**
+	 *
 	 * Holds the shared instance.
 	 *
 	 */
@@ -63,14 +99,6 @@ public final class Activator extends AbstractUIPlugin {
 	}
 
 
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see AbstractUIPlugin#start(BundleContext)
-	 *
-	 */
-
 	@Override
 	public void start( final BundleContext pContext ) throws Exception {
 
@@ -80,14 +108,6 @@ public final class Activator extends AbstractUIPlugin {
 
 	}
 
-
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see AbstractUIPlugin#stop(BundleContext)
-	 *
-	 */
 
 	@Override
 	public void stop( final BundleContext pContext ) throws Exception {
